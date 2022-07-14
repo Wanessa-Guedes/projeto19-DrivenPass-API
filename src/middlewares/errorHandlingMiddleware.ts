@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from "express";
 export function errorHanddlingMiddleware(err, req: Request, res: Response, next: NextFunction) {
     console.log(err);
     if(err.type) {
-        return res.sendStatus(errorTypeToStatusCode(err.type));
+        return res.send(err.message).status(errorTypeToStatusCode(err.type));
     }
 
     return res.sendStatus(500);
