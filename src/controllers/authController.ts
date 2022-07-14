@@ -13,3 +13,12 @@ export async function signUp(req: Request, res: Response){
     res.sendStatus(201);
 
 }
+
+export async function signIn(req: Request, res: Response) {
+    
+    const userInfo: CreateUserData = req.body;
+    
+    const token = await authServices.signIn(userInfo);
+
+    res.status(200).send(token);
+}

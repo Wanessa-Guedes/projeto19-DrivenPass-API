@@ -77,7 +77,7 @@ model Card {
 model Session {
   id Int @id @default(autoincrement())
   token String
-  is_on Boolean
+  is_on Boolean @default(true)
   creat_at DateTime @default(now())
 
   user_id Int

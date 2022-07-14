@@ -8,13 +8,20 @@ async function createUser(createUserData: CreateUserData) {
 }
 
 async function emailsRegistered(email: string) {
-    const isEmailRegistered = prisma.users.findUnique({where: {email}})
+    const isEmailRegistered = await prisma.users.findUnique({where: {email}})
 
     return isEmailRegistered
+}
+
+async function startSession(token: string, userId: number) {
+
+    await prisma.session.create({data: {token, user_id: userId}})
+
 }
 
 
 export const authRepository = {
     createUser,
-    emailsRegistered
+    emailsRegistered,
+    startSession
 }
