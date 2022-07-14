@@ -1,0 +1,85 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum card_type{
+  debito 
+  credito
+  ambos
+}
+
+model Users {
+  id Int @id @default(autoincrement())
+  email String
+  password String
+  create_at DateTime @default(now())
+
+  credentials Credential[]
+  notes Note[]
+  cards Card[]
+  session Session[]
+
+  @@map("users")
+}
+
+model Credential {
+  id Int @id @default(autoincrement())
+  url String
+  user_name String
+  password String
+  title String
+  create_at DateTime @default(now())
+
+  user_id Int
+  user Users @relation(fields: [user_id], references: [id])
+
+  @@map("credentials")
+}
+
+model Note {
+  id Int @id @default(autoincrement())
+  title String @db.VarChar(50)
+  annotation String @db.VarChar(100)
+  create_at DateTime @default(now())
+
+  user_id Int
+  user Users @relation(fields: [user_id], references: [id])
+
+  @@map("securyNotes")
+}
+
+model Card {
+  id Int @id @default(autoincrement())
+  title String
+  name String
+  number String @db.VarChar(16)
+  securityCode String @db.VarChar(3)
+  expirationDate String @db.VarChar(5)
+  password String
+  is_virtual Boolean
+  type card_type
+  create_at DateTime @default(now())
+
+  user_id Int
+  user Users @relation(fields: [user_id], references: [id])
+
+  @@map("cards")
+}
+
+model Session {
+  id Int @id @default(autoincrement())
+  token String
+  is_on Boolean
+  creat_at DateTime @default(now())
+
+  user_id Int
+  user Users @relation(fields: [user_id], references: [id])
+}
