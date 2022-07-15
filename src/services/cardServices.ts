@@ -1,6 +1,5 @@
 import Cryptr from "cryptr";
 import { cardRepository, CreateCardData } from "../repositories/cardRepository.js";
-import { credentialRepository } from "../repositories/credentialRepository.js"
 
 const cryptr = new Cryptr(process.env.CRYPT_SECRET_KEY);
 

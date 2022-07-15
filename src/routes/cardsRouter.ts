@@ -1,11 +1,9 @@
 import {Router} from "express";
 import { deleteCardById, getCards, getCardsById, insertCard } from "../controllers/cardController.js";
-import { deleteCredentialById, getCredentials, getCredentialsById, insertCredential } from "../controllers/credentialsController.js";
 import { validateIdParams } from "../middlewares/idParamsValidator.js";
 import { schemaValidator } from "../middlewares/schemaValidator.js";
 import { validateToken } from "../middlewares/tokenValidatorMiddleware.js";
 import { cardSchema } from "../schemas/cardSchema.js";
-import { credentialSchema } from "../schemas/credentialSchema.js";
 
 const cardsRouter = Router();
 
