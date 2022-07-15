@@ -31,7 +31,23 @@ async function getAllCredentials(userId: number){
     return credentials
 }
 
+async function getCredentialById(credentialId: number, userId: number) {
+    let credential = await credentialRepository.getCredentialById(credentialId, userId)
+
+    if(!credential){
+        throw{
+            type: "not_found",
+            message: "Credential not found"
+        }
+    }
+
+    credential = {...credential, password: cryptr.decrypt(credential.password)}
+
+    return credential
+}
+
 export const credentialsService = {
     insertCredential,
-    getAllCredentials
+    getAllCredentials,
+    getCredentialById
 }

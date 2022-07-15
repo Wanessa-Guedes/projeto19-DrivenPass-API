@@ -28,9 +28,19 @@ async function getAllCredentials( userId: number) {
     return credentials
 }
 
+async function getCredentialById(credentialId: number, userId: number) {
+    const credential = await prisma.credential.findFirst({where: {
+        id: credentialId,
+        user_id: userId
+    }})
+
+    return credential
+}
+
 
 export const credentialRepository = {
     insertCredential,
     checkUniqueTitle,
-    getAllCredentials
+    getAllCredentials,
+    getCredentialById
 }
