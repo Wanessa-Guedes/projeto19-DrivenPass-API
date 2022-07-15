@@ -1,36 +1,32 @@
 import { Request, Response } from "express";
 import dotenv from "dotenv";
-
-import { credentialsService } from "../services/credentialsService.js";
-import { CreateCredentialData } from "../repositories/credentialRepository.js";
-import { checkUserAuthorization } from "../utils/checkUserAuthorizationById.js";
+import { CreateNoteData } from "../repositories/safeNotesRepository.js";
+import { safeNotesService } from "../services/safeNotesService.js";
 
 dotenv.config();
 
-export async function insertCredential(req: Request, res: Response){
+export async function insertNote(req: Request, res: Response){
     
     const {userId, email} = res.locals.userInfo;
 
-    const credentialData: CreateCredentialData = req.body;
+    const noteData: CreateNoteData = req.body;
 
-    const credentials = await credentialsService.insertCredential(credentialData, userId);
-
-    console.log(credentials)
+    const note = await safeNotesService.insertNote(noteData, userId);
 
     res.sendStatus(201);
 
 }
 
-export async function getCredentials(req: Request, res: Response) {
+export async function getNotes(req: Request, res: Response) {
     //TODO: TESTAR AO INSERIR MAIS DE UM USUÁRIO
     const {userId, email} = res.locals.userInfo;
 
-    const credentials = await credentialsService.getAllCredentials(userId)
+    const notes = await safeNotesService.getAllNotes(userId)
 
-    res.send({credentials}).status(200);
+    res.send({notes}).status(200);
 }
 
-export async function getCredentialsById(req: Request, res: Response) {
+/* export async function getCredentialsById(req: Request, res: Response) {
       //TODO: TESTAR AO INSERIR MAIS DE UM USUÁRIO
         const {id} = res.locals.credentialId;
         const {userId, email} = res.locals.userInfo;
@@ -40,9 +36,9 @@ export async function getCredentialsById(req: Request, res: Response) {
         checkUserAuthorization.checkUserId(credential.user_id, userId)
 
         res.send({credential}).status(200)
-}
+} */
 
-export async function deleteCredentialById(req: Request, res: Response) {
+/* export async function deleteCredentialById(req: Request, res: Response) {
 
     const {id} = res.locals.credentialId;
     const {userId, email} = res.locals.userInfo;
@@ -57,4 +53,4 @@ export async function deleteCredentialById(req: Request, res: Response) {
 
     res.sendStatus(200)
     
-}
+} */
