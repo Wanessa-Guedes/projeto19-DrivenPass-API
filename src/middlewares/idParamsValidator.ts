@@ -10,6 +10,6 @@ export async function validateIdParams(req: Request, res: Response, next: NextFu
             message: "Incorrect credential id"
         }
     }
-    res.locals.credentialId = {id};
+    res.locals.id = {id};
     next()
 }

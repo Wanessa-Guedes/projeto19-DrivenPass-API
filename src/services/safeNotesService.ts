@@ -25,22 +25,20 @@ async function getAllNotes(userId: number){
 
     return notes
 }
-/*
-async function getCredentialById(credentialId: number) {
-    let credential = await credentialRepository.getCredentialById(credentialId)
 
-    if(!credential){
+async function getNoteById(noteId: number) {
+    const note = await safeNotesRepository.getNoteById(noteId)
+
+    if(!note){
         throw{
             type: "not_found",
-            message: "Credential not found"
+            message: "Safe Note not found"
         }
     }
 
-    credential = {...credential, password: cryptr.decrypt(credential.password)}
-
-    return credential
+    return note
 }
-
+/*
 async function deleteCredentialById(credentialId: number) {
     
     const credential = await credentialRepository.deleteCredentialById(credentialId);
@@ -56,7 +54,7 @@ async function deleteCredentialById(credentialId: number) {
 
 export const safeNotesService = {
         insertNote,
-        getAllNotes
-/*   getCredentialById,
-    deleteCredentialById */
+        getAllNotes,
+        getNoteById
+/*     deleteCredentialById */
 }

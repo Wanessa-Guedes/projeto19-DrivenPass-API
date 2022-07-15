@@ -1,6 +1,6 @@
 import {Router} from "express";
 
-import { getNotes, insertNote } from "../controllers/safeNotesController.js";
+import { getNotes, getNotesById, insertNote } from "../controllers/safeNotesController.js";
 
 import { validateIdParams } from "../middlewares/idParamsValidator.js";
 import { schemaValidator } from "../middlewares/schemaValidator.js";
@@ -12,7 +12,7 @@ const safeNotesRouter = Router();
 
 safeNotesRouter.post("/notes", schemaValidator(safeNotesSchema), validateToken, insertNote);
 safeNotesRouter.get("/notes", validateToken, getNotes);
-/* safeNotesRouter.get("/notes/:id", validateToken, validateIdParams, getCredentialsById);
-safeNotesRouter.delete("/notes/:id", validateToken, validateIdParams, deleteCredentialById); */
+safeNotesRouter.get("/notes/:id", validateToken, validateIdParams, getNotesById);
+/*safeNotesRouter.delete("/notes/:id", validateToken, validateIdParams, deleteCredentialById); */
 
 export default safeNotesRouter
