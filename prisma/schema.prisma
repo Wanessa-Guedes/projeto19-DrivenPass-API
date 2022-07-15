@@ -25,7 +25,7 @@ model Users {
   credentials Credential[]
   notes Note[]
   cards Card[]
-  session Session[]
+  sessions Session[]
 
   @@map("users")
 }
@@ -41,17 +41,21 @@ model Credential {
   user_id Int
   user Users @relation(fields: [user_id], references: [id])
 
+  @@unique([user_id, title])
+
   @@map("credentials")
 }
 
 model Note {
   id Int @id @default(autoincrement())
   title String @db.VarChar(50)
-  annotation String @db.VarChar(100)
+  annotation String @db.VarChar(1000)
   create_at DateTime @default(now())
 
   user_id Int
   user Users @relation(fields: [user_id], references: [id])
+
+  @@unique([user_id, title])
 
   @@map("securyNotes")
 }
@@ -71,6 +75,8 @@ model Card {
   user_id Int
   user Users @relation(fields: [user_id], references: [id])
 
+  @@unique([user_id, title])
+
   @@map("cards")
 }
 
@@ -82,4 +88,6 @@ model Session {
 
   user_id Int
   user Users @relation(fields: [user_id], references: [id])
+
+  @@map("sessions")
 }
