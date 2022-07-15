@@ -28,19 +28,26 @@ async function getAllCredentials( userId: number) {
     return credentials
 }
 
-async function getCredentialById(credentialId: number, userId: number) {
-    const credential = await prisma.credential.findFirst({where: {
-        id: credentialId,
-        user_id: userId
+async function getCredentialById(credentialId: number) {
+    const credential = await prisma.credential.findUnique({where:
+        {id: credentialId}
+    })
+
+    return credential
+}
+
+async function deleteCredentialById(credentialId: number) {
+    const credential = await prisma.credential.delete({where:{
+        id: credentialId
     }})
 
     return credential
 }
 
-
 export const credentialRepository = {
     insertCredential,
     checkUniqueTitle,
     getAllCredentials,
-    getCredentialById
+    getCredentialById,
+    deleteCredentialById
 }
