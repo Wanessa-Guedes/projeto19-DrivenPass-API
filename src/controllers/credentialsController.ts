@@ -20,3 +20,12 @@ export async function insertCredential(req: Request, res: Response){
     res.sendStatus(201);
 
 }
+
+export async function getCredentials(req: Request, res: Response) {
+    //TODO: TESTAR AO INSERIR MAIS DE UM USUÁRIO
+    const {userId, email} = res.locals.userInfo;
+
+    const credentials = await credentialsService.getAllCredentials(userId)
+
+    res.send({credentials}).status(200);
+}

@@ -21,7 +21,17 @@ async function insertCredential(credentialData: CreateCredentialData, userId: nu
     
 }
 
+async function getAllCredentials(userId: number){
+    let credentials = await credentialRepository.getAllCredentials(userId);
+
+    credentials = credentials.map(credential => {
+        return {...credential, password: cryptr.decrypt(credential.password)}
+    })    
+
+    return credentials
+}
 
 export const credentialsService = {
-    insertCredential
+    insertCredential,
+    getAllCredentials
 }

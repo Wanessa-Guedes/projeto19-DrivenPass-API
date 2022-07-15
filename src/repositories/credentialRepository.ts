@@ -18,8 +18,19 @@ async function checkUniqueTitle(credentialData: CreateCredentialData, userId: nu
     return titleRegitered
 }
 
+async function getAllCredentials( userId: number) {
+    const credentials = await prisma.credential.findMany({
+        where:{
+            user_id: userId
+        }
+    })
+
+    return credentials
+}
+
 
 export const credentialRepository = {
     insertCredential,
-    checkUniqueTitle
+    checkUniqueTitle,
+    getAllCredentials
 }
