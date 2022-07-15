@@ -39,19 +39,19 @@ export async function getNotesById(req: Request, res: Response) {
         res.send({note}).status(200)
 }
 
-/* export async function deleteCredentialById(req: Request, res: Response) {
+export async function deleteNoteById(req: Request, res: Response) {
 
-    const {id} = res.locals;
+    const {id} = res.locals.id;
     const {userId, email} = res.locals.userInfo;
 
-    const credential = await credentialsService.getCredentialById(id)
+    const note = await safeNotesService.getNoteById(id)
 
-    const result = checkUserAuthorization.checkUserId(credential.user_id, userId)
+    const result = checkUserAuthorization.checkUserId(note.user_id, userId)
 
     if(result == "ok"){
-        await credentialsService.deleteCredentialById(id)
+        await safeNotesService.deletenoteById(id)
     }
 
     res.sendStatus(200)
     
-} */
+}

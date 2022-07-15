@@ -38,23 +38,22 @@ async function getNoteById(noteId: number) {
 
     return note
 }
-/*
-async function deleteCredentialById(credentialId: number) {
-    
-    const credential = await credentialRepository.deleteCredentialById(credentialId);
 
-    if(!credential){
+async function deletenoteById(noteId: number) {
+    
+    const note = await safeNotesRepository.deleteNoteById(noteId);
+
+    if(!note){
         throw{
             type: "not_found",
-            message: "Credential not found"
+            message: "Note not found"
         }
     }
-} */
-
+}
 
 export const safeNotesService = {
         insertNote,
         getAllNotes,
-        getNoteById
-/*     deleteCredentialById */
+        getNoteById,
+        deletenoteById
 }

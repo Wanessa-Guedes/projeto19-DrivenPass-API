@@ -36,18 +36,18 @@ async function getNoteById(noteId: number) {
     return note
 }
 
-/* async function deleteCredentialById(credentialId: number) {
-    const credential = await prisma.credential.delete({where:{
-        id: credentialId
+async function deleteNoteById(noteId: number) {
+    const note = await prisma.note.delete({where:{
+        id: noteId
     }})
 
-    return credential
-} */
+    return note
+}
 
 export const safeNotesRepository = {
     insertNote,
     checkUniqueTitle,
     getAllNotes,
-    getNoteById
-/*  deleteCredentialById */
+    getNoteById,
+    deleteNoteById
 }
