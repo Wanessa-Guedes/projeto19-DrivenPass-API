@@ -17,46 +17,44 @@ export async function insertWifi(req: Request, res: Response){
 
     const wifi = await wifiService.insertWifi(wifiData, userId);
 
-    console.log(wifi)
-
     res.sendStatus(201);
 
 }
 
-/* export async function getCredentials(req: Request, res: Response) {
+export async function getWifis(req: Request, res: Response) {
     //TODO: TESTAR AO INSERIR MAIS DE UM USUÁRIO
     const {userId, email} = res.locals.userInfo;
 
-    const credentials = await credentialsService.getAllCredentials(userId)
+    const wifis = await wifiService.getAllWifis(userId)
 
-    res.send({credentials}).status(200);
-} */
+    res.send({wifis}).status(200);
+}
 
-/* export async function getCredentialsById(req: Request, res: Response) {
+export async function getWifiById(req: Request, res: Response) {
       //TODO: TESTAR AO INSERIR MAIS DE UM USUÁRIO
         const {id} = res.locals.id;
         const {userId, email} = res.locals.userInfo;
 
-        const credential = await credentialsService.getCredentialById(id);
+        const wifi = await wifiService.getWifiById(id);
 
-        checkUserAuthorization.checkUserId(credential.user_id, userId)
+        checkUserAuthorization.checkUserId(wifi.user_id, userId)
 
-        res.send({credential}).status(200)
-} */
+        res.send({wifi}).status(200)
+}
 
-/* export async function deleteCredentialById(req: Request, res: Response) {
+export async function deleteWifiById(req: Request, res: Response) {
 
     const {id} = res.locals.id;
     const {userId, email} = res.locals.userInfo;
 
-    const credential = await credentialsService.getCredentialById(id)
+    const wifi = await wifiService.getWifiById(id)
 
-    const result = checkUserAuthorization.checkUserId(credential.user_id, userId)
+    const result = checkUserAuthorization.checkUserId(wifi.user_id, userId)
 
     if(result == "ok"){
-        await credentialsService.deleteCredentialById(id)
+        await wifiService.deleteWifiById(id)
     }
 
     res.sendStatus(200)
     
-} */
+}

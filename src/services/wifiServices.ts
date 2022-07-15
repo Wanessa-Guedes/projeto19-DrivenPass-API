@@ -6,13 +6,13 @@ const cryptr = new Cryptr(process.env.CRYPT_SECRET_KEY);
 
 async function insertWifi(wifiData: CreateWifiData, userId: number) {
 
-    const isTitleRegitered = await wifiRepository.checkUniqueTitle(wifiData, userId);
+/*     const isTitleRegitered = await wifiRepository.checkUniqueTitle(wifiData, userId);
     if(isTitleRegitered){
         throw {
             type: "conflict",
             message: "Title already registered"
         }
-    }
+    } */
 
     const password = wifiData.password;
     
@@ -22,47 +22,47 @@ async function insertWifi(wifiData: CreateWifiData, userId: number) {
     
 }
 
-/* async function getAllCredentials(userId: number){
-    let credentials = await credentialRepository.getAllCredentials(userId);
+async function getAllWifis(userId: number){
+    let wifis = await wifiRepository.getAllWifis(userId);
 
-    credentials = credentials.map(credential => {
-        return {...credential, password: cryptr.decrypt(credential.password)}
+    wifis = wifis.map(wifi => {
+        return {...wifi, password: cryptr.decrypt(wifi.password)}
     })    
 
-    return credentials
-} */
+    return wifis
+}
 
-/* async function getCredentialById(credentialId: number) {
-    let credential = await credentialRepository.getCredentialById(credentialId)
+async function getWifiById(wifiId: number) {
+    let wifi = await wifiRepository.getWifiById(wifiId)
 
-    if(!credential){
+    if(!wifi){
         throw{
             type: "not_found",
-            message: "Credential not found"
+            message: "Wifi data not found"
         }
     }
 
-    credential = {...credential, password: cryptr.decrypt(credential.password)}
+    wifi = {...wifi, password: cryptr.decrypt(wifi.password)}
 
-    return credential
-} */
+    return wifi
+}
 
-/* async function deleteCredentialById(credentialId: number) {
+async function deleteWifiById(credentialId: number) {
     
-    const credential = await credentialRepository.deleteCredentialById(credentialId);
+    const wifi = await wifiRepository.deleteWifiById(credentialId);
 
-    if(!credential){
+    if(!wifi){
         throw{
             type: "not_found",
-            message: "Credential not found"
+            message: "Wifi data not found"
         }
     }
-} */
+} 
 
 
 export const wifiService = {
     insertWifi,
-/*     getAllCredentials,
-    getCredentialById,
-    deleteCredentialById */
+    getAllWifis,
+    getWifiById,
+    deleteWifiById
 }

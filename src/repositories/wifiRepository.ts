@@ -18,36 +18,36 @@ async function checkUniqueTitle(wifiData: CreateWifiData, userId: number) {
     return titleRegitered
 }
 
-/* async function getAllCredentials( userId: number) {
-    const credentials = await prisma.credential.findMany({
+async function getAllWifis( userId: number) {
+    const wifis = await prisma.wifi.findMany({
         where:{
             user_id: userId
         }
     })
 
-    return credentials
-} */
+    return wifis
+}
 
-/* async function getCredentialById(credentialId: number) {
-    const credential = await prisma.credential.findUnique({where:
-        {id: credentialId}
+async function getWifiById(wifiId: number) {
+    const wifi = await prisma.wifi.findUnique({where:
+        {id: wifiId}
     })
 
-    return credential
-} */
+    return wifi
+}
 
-/* async function deleteCredentialById(credentialId: number) {
-    const credential = await prisma.credential.delete({where:{
-        id: credentialId
+async function deleteWifiById(wifiId: number) {
+    const wifi = await prisma.wifi.delete({where:{
+        id: wifiId
     }})
 
-    return credential
-} */
+    return wifi
+}
 
 export const wifiRepository = {
     insertWifi,
     checkUniqueTitle,
-/*     getAllCredentials,
-    getCredentialById,
-    deleteCredentialById */
+    getAllWifis,
+    getWifiById,
+    deleteWifiById
 }
