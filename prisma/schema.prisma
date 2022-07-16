@@ -103,7 +103,5 @@ model Wifi {
   user_id Int
   user Users @relation(fields: [user_id], references: [id])
 
-  @@unique([user_id, title])
-
   @@map("wifis")
 }

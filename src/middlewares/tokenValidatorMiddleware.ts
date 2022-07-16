@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
+import { authRepository } from "../repositories/authRepository.js";
 
 export async function validateToken(req: Request, res: Response, next: NextFunction) {
 
@@ -31,10 +32,20 @@ export async function validateToken(req: Request, res: Response, next: NextFunct
         userInfoToken = jwt.verify(token, secretKey);
             // id -> email
     }
+    //console.log(token, userInfoToken.id)
+    const session = await authRepository.isValidSession(token, userInfoToken.id)
+
+    if(!session.is_on){
+        throw{
+            type: "unauthorized", 
+            message: "Session Expired"
+        }
+    }
 
     res.locals.userInfo = {
         userId: userInfoToken.id,
-        userEmail: userInfoToken.email
+        userEmail: userInfoToken.email,
+        sessionId: session.id
     }
     
     next()

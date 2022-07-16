@@ -11,7 +11,7 @@ dotenv.config();
 
 export async function insertCard(req: Request, res: Response){
     
-    const {userId, email} = res.locals.userInfo;
+    const userId = res.locals.userInfo.userId;
 
     const type: string = req.body.type;
 
@@ -26,15 +26,13 @@ export async function insertCard(req: Request, res: Response){
 
     const cards = await cardService.insertCard(cardData, userId);
 
-    console.log(cards)
-
     res.sendStatus(201);
 
 }
 
 export async function getCards(req: Request, res: Response) {
     //TODO: TESTAR AO INSERIR MAIS DE UM USUÁRIO
-    const {userId, email} = res.locals.userInfo;
+    const userId = res.locals.userInfo.userId;
 
     const cards = await cardService.getAllCards(userId)
 
@@ -44,7 +42,7 @@ export async function getCards(req: Request, res: Response) {
 export async function getCardsById(req: Request, res: Response) {
       //TODO: TESTAR AO INSERIR MAIS DE UM USUÁRIO
         const {id} = res.locals.id;
-        const {userId, email} = res.locals.userInfo;
+        const userId = res.locals.userInfo.userId;
 
         const card = await cardService.getCardById(id);
 
@@ -56,7 +54,7 @@ export async function getCardsById(req: Request, res: Response) {
 export async function deleteCardById(req: Request, res: Response) {
 
     const {id} = res.locals.id;
-    const {userId, email} = res.locals.userInfo;
+    const userId = res.locals.userInfo.userId;
 
     const card = await cardService.getCardById(id)
 

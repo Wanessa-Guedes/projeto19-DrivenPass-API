@@ -9,13 +9,11 @@ dotenv.config();
 
 export async function insertCredential(req: Request, res: Response){
     
-    const {userId, email} = res.locals.userInfo;
+    const userId = res.locals.userInfo.userId;
 
     const credentialData: CreateCredentialData = req.body;
 
     const credentials = await credentialsService.insertCredential(credentialData, userId);
-
-    console.log(credentials)
 
     res.sendStatus(201);
 
@@ -23,7 +21,7 @@ export async function insertCredential(req: Request, res: Response){
 
 export async function getCredentials(req: Request, res: Response) {
     //TODO: TESTAR AO INSERIR MAIS DE UM USUÁRIO
-    const {userId, email} = res.locals.userInfo;
+    const userId = res.locals.userInfo.userId;
 
     const credentials = await credentialsService.getAllCredentials(userId)
 
@@ -33,7 +31,7 @@ export async function getCredentials(req: Request, res: Response) {
 export async function getCredentialsById(req: Request, res: Response) {
       //TODO: TESTAR AO INSERIR MAIS DE UM USUÁRIO
         const {id} = res.locals.id;
-        const {userId, email} = res.locals.userInfo;
+        const userId = res.locals.userInfo.userId;
 
         const credential = await credentialsService.getCredentialById(id);
 
@@ -45,7 +43,7 @@ export async function getCredentialsById(req: Request, res: Response) {
 export async function deleteCredentialById(req: Request, res: Response) {
 
     const {id} = res.locals.id;
-    const {userId, email} = res.locals.userInfo;
+    const userId = res.locals.userInfo.userId;
 
     const credential = await credentialsService.getCredentialById(id)
 

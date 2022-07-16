@@ -22,3 +22,12 @@ export async function signIn(req: Request, res: Response) {
 
     res.status(200).send(token);
 }
+
+export async function logOut(req: Request, res: Response) {
+
+    const sessionId = res.locals.userInfo.sessionId;
+
+    const logOut = await authServices.logOut(sessionId)
+
+    res.sendStatus(200)
+}

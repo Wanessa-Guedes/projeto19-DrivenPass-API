@@ -1,4 +1,4 @@
-import { Users } from "@prisma/client";
+import { Users, Session } from "@prisma/client";
 import {prisma} from "../config/databse.js";
 
 export type CreateUserData = Omit<Users, "id" | "create_at">
@@ -19,9 +19,29 @@ async function startSession(token: string, userId: number) {
 
 }
 
+async function isValidSession(token: string, userId: number) {
+    const session = await prisma.session.findFirst({where: {token, user_id: userId}})
+    if(!session){
+        throw{
+            type: "unauthorized", 
+            message: "Not a valid session"
+        }
+    }
+
+    return session
+}
+
+async function finishSession(sessionId: number) {
+    const session = await prisma.session.update({where: {id: sessionId},
+    data:{is_on: false}})
+        console.log(session)
+    return session
+}
 
 export const authRepository = {
     createUser,
     emailsRegistered,
-    startSession
+    startSession,
+    isValidSession,
+    finishSession
 }

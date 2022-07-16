@@ -11,7 +11,7 @@ dotenv.config();
 
 export async function insertWifi(req: Request, res: Response){
     
-    const {userId, email} = res.locals.userInfo;
+    const userId = res.locals.userInfo.userId;
 
     const wifiData: CreateWifiData = req.body;
 
@@ -23,7 +23,7 @@ export async function insertWifi(req: Request, res: Response){
 
 export async function getWifis(req: Request, res: Response) {
     //TODO: TESTAR AO INSERIR MAIS DE UM USUÁRIO
-    const {userId, email} = res.locals.userInfo;
+    const userId = res.locals.userInfo.userId;
 
     const wifis = await wifiService.getAllWifis(userId)
 
@@ -33,7 +33,7 @@ export async function getWifis(req: Request, res: Response) {
 export async function getWifiById(req: Request, res: Response) {
       //TODO: TESTAR AO INSERIR MAIS DE UM USUÁRIO
         const {id} = res.locals.id;
-        const {userId, email} = res.locals.userInfo;
+        const userId = res.locals.userInfo.userId;
 
         const wifi = await wifiService.getWifiById(id);
 
@@ -45,7 +45,7 @@ export async function getWifiById(req: Request, res: Response) {
 export async function deleteWifiById(req: Request, res: Response) {
 
     const {id} = res.locals.id;
-    const {userId, email} = res.locals.userInfo;
+    const userId = res.locals.userInfo.userId;
 
     const wifi = await wifiService.getWifiById(id)
 

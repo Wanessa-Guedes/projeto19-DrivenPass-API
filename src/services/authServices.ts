@@ -54,7 +54,15 @@ async function signIn(createUserData: CreateUserData) {
 
 }
 
+async function logOut(sessionId: number) {
+    console.log(sessionId)
+    const logOutSession = await authRepository.finishSession(sessionId)
+
+    return logOutSession
+}
+
 export const authServices = {
     signUp,
-    signIn
+    signIn,
+    logOut
 }
