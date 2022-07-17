@@ -11,7 +11,10 @@ async function insertCard(cardData: CreateCardData, userId: number){
 
 async function checkUniqueTitle(cardData: CreateCardData, userId: number) {
     const titleRegitered = await prisma.card.findFirst({where: {
-        title: cardData.title, 
+        title: {
+            contains: cardData.title, 
+            mode: 'insensitive'
+        },
         user_id: userId
     }})
 

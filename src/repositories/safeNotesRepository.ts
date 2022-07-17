@@ -11,7 +11,10 @@ async function insertNote(noteData: CreateNoteData, userId: number){
 
 async function checkUniqueTitle(noteData: CreateNoteData, userId: number) {
     const titleRegitered = await prisma.note.findFirst({where: {
-        title: noteData.title, 
+        title: {
+            contains: noteData.title, 
+            mode: 'insensitive'
+        }, 
         user_id: userId
     }})
 

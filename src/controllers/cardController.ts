@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
 import dotenv from "dotenv";
 
-import { credentialsService } from "../services/credentialsService.js";
-import { CreateCredentialData } from "../repositories/credentialRepository.js";
 import { checkUserAuthorization } from "../utils/checkUserAuthorizationById.js";
 import { CreateCardData } from "../repositories/cardRepository.js";
 import { cardService } from "../services/cardServices.js";

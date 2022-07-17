@@ -9,15 +9,6 @@ async function insertWifi(wifiData: CreateWifiData, userId: number){
     return wifis
 }
 
-async function checkUniqueTitle(wifiData: CreateWifiData, userId: number) {
-    const titleRegitered = await prisma.wifi.findFirst({where: {
-        title: wifiData.title, 
-        user_id: userId
-    }})
-
-    return titleRegitered
-}
-
 async function getAllWifis( userId: number) {
     const wifis = await prisma.wifi.findMany({
         where:{
@@ -46,7 +37,6 @@ async function deleteWifiById(wifiId: number) {
 
 export const wifiRepository = {
     insertWifi,
-    checkUniqueTitle,
     getAllWifis,
     getWifiById,
     deleteWifiById

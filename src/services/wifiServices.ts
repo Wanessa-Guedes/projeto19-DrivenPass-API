@@ -6,14 +6,6 @@ const cryptr = new Cryptr(process.env.CRYPT_SECRET_KEY);
 
 async function insertWifi(wifiData: CreateWifiData, userId: number) {
 
-/*     const isTitleRegitered = await wifiRepository.checkUniqueTitle(wifiData, userId);
-    if(isTitleRegitered){
-        throw {
-            type: "conflict",
-            message: "Title already registered"
-        }
-    } */
-
     const password = wifiData.password;
     
     const wifi = await wifiRepository.insertWifi({...wifiData, password: cryptr.encrypt(password)}, userId)

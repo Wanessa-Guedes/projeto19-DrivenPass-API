@@ -1,4 +1,4 @@
-import { Users, Session } from "@prisma/client";
+import { Users } from "@prisma/client";
 import {prisma} from "../config/databse.js";
 
 export type CreateUserData = Omit<Users, "id" | "create_at">
@@ -34,7 +34,7 @@ async function isValidSession(token: string, userId: number) {
 async function finishSession(sessionId: number) {
     const session = await prisma.session.update({where: {id: sessionId},
     data:{is_on: false}})
-        console.log(session)
+
     return session
 }
 

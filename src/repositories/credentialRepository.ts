@@ -11,7 +11,10 @@ async function insertCredential(credentialData: CreateCredentialData, userId: nu
 
 async function checkUniqueTitle(credentialData: CreateCredentialData, userId: number) {
     const titleRegitered = await prisma.credential.findFirst({where: {
-        title: credentialData.title, 
+        title: {
+            contains: credentialData.title, 
+            mode: 'insensitive'
+        }, 
         user_id: userId
     }})
 
