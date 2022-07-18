@@ -2,8 +2,8 @@ import express, { json } from "express";
 import "express-async-errors";
 import dotenv from "dotenv";
 
-import router from "./../src/routes/index.js"; 
-import { errorHanddlingMiddleware}  from "./../src/middlewares/errorHandlingMiddleware.js";
+import router from "./src/routes/index.js"; 
+import { errorHanddlingMiddleware}  from "./src/middlewares/errorHandlingMiddleware.js";
 
 dotenv.config();
 
