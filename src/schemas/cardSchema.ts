@@ -8,5 +8,5 @@ export const cardSchema = Joi.object({
     expirationDate: Joi.string().pattern(new RegExp('^[0-9]{2}\/[0-9]{2}$')).required(),
     password: Joi.string().required(),
     is_virtual: Joi.boolean(),
-    type: Joi.equal("crédito", "débito", "ambos").required()
+    type: Joi.string().valid("crédito", "débito", "ambos").insensitive().required()
 }) 
