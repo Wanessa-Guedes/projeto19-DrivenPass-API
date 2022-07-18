@@ -13,11 +13,14 @@ export async function insertCard(req: Request, res: Response){
 
     const type: string = req.body.type;
 
-    if(type == "débito"){
+    if(type.toLowerCase() == "débito"){
         req.body.type = "debito"
     }
-    if(type == "crédito"){
+    if(type.toLowerCase() == "crédito"){
         req.body.type = "credito"
+    }
+    if(type.toLowerCase() == "ambos"){
+        req.body.type = "ambos"
     }
 
     const cardData: CreateCardData = req.body;
